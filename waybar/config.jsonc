@@ -1,52 +1,71 @@
 {
-    "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar at the bottom of your screen
-    "height": 25, // Waybar height
-    // "width": 1280, // Waybar width
-    // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces","custom/arrow6","mpris"],
-    "modules-center": ["clock#1"],
-    "modules-right": ["custom/arrow5","pulseaudio","custom/arrow4", "clock#2", "custom/arrow3","cpu", "memory","custom/arrow1", "tray","custom/arrow2","hyprland/language"],
-    // Modules configuration
-     "hyprland/workspaces": {
-         "disable-scroll": false,
-         "all-outputs": false,
-         "format": "{name}"
-     },
+    "layer": "top",
+    "height": 32,
+    "position": "top",
+    "spacing": 1,
+    "modules-left": [
+        "hyprland/workspaces",
+        "mpris"
+    ],
+    "modules-center": [
+    "hyprland/window"
+    ],
+    "modules-right": [
+    "clock",
+    "pulseaudio",
+    "cpu",
+    "memory",
+    "tray",
+    "network"
+    ],
+    
+
+
+ "mpris": {
+    	"format": "{status_icon} {artist} - {title}",
+    	"format-stopped": "",
+    	"status-icons": {
+    		"playing": "",
+    		"paused": "󰐊"
+  		  },
+	},
     "tray": {
-	//"icon-size": 21,
+        "icon-size": 13,
         "spacing": 10
     },
-    "clock#1": {
-        "format": "󰥔  {:%H:%M}",
-        "tooltip-format": "󰥔  {:%Y-%m-%d | %H:%M}"
-    },
-	"clock#2": {
-		"format": " {:%d. %B %Y}  󰃭 ",
-		 "tooltip-format": "{:%Y-%m-%d | %H:%M}"
+   "clock": {
+      "format": " {:%I:%M %p}", 
+      "format-alt": " {:%A  %e %B}",
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+   },
 
-	},
-	 "hyprland/language": {
-	"format": "󰥻  {}",
-	"format-ru": "ru",
-	"on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next",
-	"format-en": "us"
-}, 
-    "cpu": {
+  "cpu": {
         "format": "{usage}% "
     },
-    "memory": {
+    
+   "memory": {
         "format": "{}% "
     },
-    "network": {
-        // "interface": "wlp2s0", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-disconnected": "Disconnected ⚠"
-    },
-    "pulseaudio": {
-        "scroll-step": 5,
-        "format": "{volume}% {icon}",
+    
+  "network": {
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "format": "{icon}",
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰀂",
+    "format-disconnected": "󰤮",
+    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-disconnected": "Disconnected",
+    "interval": 3,
+    "spacing": 1,
+    "on-click": "foot -e nmtui"
+  },
+
+
+
+ "pulseaudio": {
+        "scroll-step": 1,
+        "format": "{icon} {volume}%",
         "format-bluetooth": "{volume}% {icon}",
         "format-muted": "",
         "format-icons": {
@@ -58,38 +77,8 @@
             "car": "",
             "default": ["", ""]
         },
+
         "on-click": "foot -e wiremix"
     },
-    "mpris": {
-     	"format": "{status_icon} {artist} - {title}",
-     	"format-stopped": "",
-     	"status-icons": {
-     		"playing": "",
-     		"paused": "󰐊"
-   		  },
-	},
-	"custom/arrow1": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/arrow3": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/arrow4": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/arrow5": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/arrow6": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/arrow2": {
-		"format": "",
-		"tooltip": false
-	},
+    
 }
