@@ -4,18 +4,27 @@ configuration {
 }
 
 * {
-    base:     #1e1e2e;
-    surface0: #313244;
-    overlay0: #6c7086;
-    text:     #cdd6f4;
-
-    mauve:    #cba6f7;
-    red:      #f38ba8;
-    peach:    #fab387;
-    green:    #a6e3a1;
-    lavender: #b4befe;
-
-    background-color: transparent;
+   bg: #191724;
+   	cur: #1f1d2e;
+   	fgd: #e0def4;
+   	cmt: #6e6a86;
+   	cya: #9ccfd8;
+   	grn: #31748f;
+   	ora: #ebbcba;
+   	pur: #c4a7e7;
+   	red: #eb6f92;
+   	yel: #f6c177;
+   
+    foreground: @fgd;
+    background: @bg;
+    active-background: @grn;
+   	urgent-background: @red;
+    
+   	selected-background: @active-background;
+   	selected-urgent-background: @urgent-background;
+   	selected-active-background: @active-background;
+   	separatorcolor: @active-background;
+    bordercolor: @ora;
 }
 
 window {
@@ -23,28 +32,28 @@ window {
     width:            400;
     border:           3;
     border-radius:    10;
-    border-color:     @lavender;
-    background-color: @base;
+    border-color:     @bordercolor;
+    background-color: @background;
 }
 
 mainbox {
     spacing:          0;
     children:         [inputbar, message, listview];
-    background-color: @base;
+    background-color: @background;
 }
 
 inputbar {
     padding:          14;
-    background-color: @base;
-    text-color:       @text;
+    background-color: @background;
+    text-color:       @foreground;
 }
 
 listview {
     padding:          8;
     border-radius:    0 0 10 10;
     border:           2 0 0 0;
-    border-color:     @surface0;
-    background-color: @base;
+    border-color:     @bordercolor;
+    background-color: @background;
     dynamic:          true;
     fixed-height:     false;
 }
@@ -54,52 +63,51 @@ element {
     padding:          5;
     spacing:          10;
     border-radius:    10;
-    background-color: @surface0;
-    text-color:       @text;
+    background-color: @background;
+    text-color:       @foreground;
 }
 
 
-element-text, element-icon {
-    background-color: inherit;
-    text-color:       inherit;
-    vertical-align:   0.5;
+#element.normal.normal {
+	background-color: @background;
+	text-color:       @foreground;
 }
-
-
-element normal.normal,
-element alternate.normal {
-    background-color: @surface0;
-    text-color:       @text;
+#element.normal.urgent {
+	background-color: @urgent-background;
+	text-color:       @urgent-foreground;
 }
-
-
-element selected.normal {
-    background-color: @overlay0;
-    text-color:       @base;
+#element.normal.active {
+	background-color: @active-background;
+	text-color:       @background;
 }
-
-
-element normal.active,
-element alternate.active {
-    background-color: @peach;
-    text-color:       @base; 
+#element.selected.normal {
+	background-color: @selected-background;
+	text-color:       @foreground;
 }
-
-
-element selected.active {
-    background-color: @green;
-    text-color:       @base; 
+#element.selected.urgent {
+	background-color: @selected-urgent-background;
+	text-color:       @foreground;
 }
-
-element normal.urgent,
-element alternate.urgent {
-    background-color: @red;
-    text-color:       @base;
+#element.selected.active {
+	background-color: @selected-active-background;
+	text-color:       @background;
+}
+#element.alternate.normal {
+	background-color: @background;
+	text-color:       @foreground;
+}
+#element.alternate.urgent {
+	background-color: @urgent-background;
+	text-color:       @foreground;
+}
+#element.alternate.active {
+	background-color: @active-background;
+	text-color:       @foreground;
 }
 
 element selected.urgent {
-    background-color: @mauve;
-    text-color:       @base;
+   background-color: @selected-urgent-background;
+   	text-color:       @foreground;
 }
 
 
@@ -109,11 +117,11 @@ prompt, entry, element-icon, element-text {
 
 prompt {
     margin: 0 10 0 0;
-    text-color: @lavender;
+    text-color: @foreground;
 }
 
 entry {
-    text-color: @text;
+    text-color: @cya;
     placeholder: "";
 }
 
